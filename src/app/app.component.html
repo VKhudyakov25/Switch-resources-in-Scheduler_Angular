@@ -1,0 +1,47 @@
+<dx-drop-down-box
+  [value]="[1, 2]"
+  valueExpr="id"
+  placeholder="Select a person ..."
+  displayExpr="text"
+  [showClearButton]="true"
+  [dataSource]="dsPerson"
+>
+  <div *dxTemplate="let data of 'content'">
+    <dx-data-grid
+      [dataSource]="dsPerson"
+      [columnAutoWidth]="true"
+      [showBorders]="true"
+      [hoverStateEnabled]="true"
+      [selection]="{ mode: 'multiple' }"
+      (onSelectionChanged)="changeEvent($event)"
+    >
+      <dxi-column dataField="text"></dxi-column>
+      <dxi-column dataField="age"></dxi-column>
+      <dxi-column dataField="discipline"></dxi-column>
+    </dx-data-grid>
+  </div>
+</dx-drop-down-box>
+
+<dx-scheduler
+  [dataSource]="dataSource"
+  textExpr="text"
+  [showAllDayPanel]="false"
+  height="600"
+  recurrenceRuleExpr="recurrenceRule"
+  [currentDate]="currentDate"
+  [groups]="['personId']"
+  currentView="month"
+  [startDayHour]="9"
+  [endDayHour]="20"
+  timeZone="Europe/Berlin"
+>
+  <dxi-view type="month"></dxi-view>
+  <dxi-view type="timelineWeek"></dxi-view>
+  <dxi-view type="agenda"></dxi-view>
+  <dxi-resource
+    fieldExpr="personId"
+    [allowMultiple]="false"
+    [dataSource]="personData"
+    label="person"
+  ></dxi-resource>
+</dx-scheduler>
